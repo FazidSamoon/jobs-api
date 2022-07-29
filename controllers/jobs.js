@@ -6,6 +6,10 @@ export const getJobById = (req, res) => {
   res.send("get job by id");
 };
 
+export const createJob = (req,res)=> {
+  res.send("create job route")
+}
+
 export const deleteJob = (req, res) => {
   res.send("delete job route");
 };

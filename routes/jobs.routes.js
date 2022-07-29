@@ -5,10 +5,12 @@ import {
   getJobById,
   deleteJob,
   updateJob,
-} from "../controllers/jobs";
+  createJob,
+} from "../controllers/jobs.js";
 
 jobsRoute.get("/", getAllJobs);
 jobsRoute.get("/:id", getJobById);
+jobsRoute.post("/", createJob);
 jobsRoute.patch("/:id", updateJob);
 jobsRoute.delete("/:id", deleteJob);
 

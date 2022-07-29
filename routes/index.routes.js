@@ -1,5 +1,5 @@
-import authRoute from "./auth.routes";
-import jobsRoute from "./jobs.routes";
+import authRoute from "./auth.routes.js";
+import jobsRoute from "./jobs.routes.js";
 import Express from "express";
 const route = Express.Router();
 
