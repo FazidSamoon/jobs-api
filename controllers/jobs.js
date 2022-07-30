@@ -1,19 +1,19 @@
-export const getAllJobs = (req, res) => {
+export const getAllJobs = async(req, res) => {
   res.send("get all jobs route");
 };
 
-export const getJobById = (req, res) => {
+export const getJobById = async(req, res) => {
   res.send("get job by id");
 };
 
-export const createJob = (req,res)=> {
+export const createJob = async(req,res)=> {
   res.send("create job route")
 }
 
-export const deleteJob = (req, res) => {
+export const deleteJob = async(req, res) => {
   res.send("delete job route");
 };
 
-export const updateJob = (req, res) => {
+export const updateJob = async(req, res) => {
   res.send("update jpb route");
 };

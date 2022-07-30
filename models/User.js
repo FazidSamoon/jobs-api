@@ -1,9 +1,11 @@
 import Mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import Jwt from "jsonwebtoken";
 
 const UserSchema = new Mongoose.Schema({
-  name: {
+  username: {
     type: String,
-    required: [true, "Please provide a user name"],
+    required: [true, "Please provide a username"],
     maxlength: 50,
     minlength: 3,
   },
@@ -22,3 +24,25 @@ const UserSchema = new Mongoose.Schema({
     minlength: 8,
   },
 });
+
+UserSchema.pre("save", async function (next) {
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+  const isMatch = await bcrypt.compare(candidatePassword, this.password);
+  return isMatch;
+};
+
+// UserSchema.methods.createJWT = function () {
+//   return Jwt.sign(
+//     { userID: this._id, name: this.username },
+//     process.env.JWT_WEB_TOKEN,
+//     { expiresIn: "30d" }
+//   );
+// };
+
+const UserModel = Mongoose.model("User", UserSchema);
+export default UserModel;
