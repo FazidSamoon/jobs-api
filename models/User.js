@@ -31,18 +31,21 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
+//mehod which compares the password with tge hashed password
 UserSchema.methods.comparePassword = async function (candidatePassword) {
   const isMatch = await bcrypt.compare(candidatePassword, this.password);
   return isMatch;
 };
 
-// UserSchema.methods.createJWT = function () {
-//   return Jwt.sign(
-//     { userID: this._id, name: this.username },
-//     process.env.JWT_WEB_TOKEN,
-//     { expiresIn: "30d" }
-//   );
-// };
+
+//method which creates jwt token
+UserSchema.methods.createJWT = function () {
+  return Jwt.sign(
+    { userID: this._id, name: this.username },
+    process.env.JWT_WEB_TOKEN,
+    { expiresIn: "30d" }
+  );
+};
 
 const UserModel = Mongoose.model("User", UserSchema);
 export default UserModel;

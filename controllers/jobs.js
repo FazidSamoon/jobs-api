@@ -1,5 +1,5 @@
 export const getAllJobs = async(req, res) => {
-  res.send("get all jobs route");
+  res.json(req.user);
 };
 
 export const getJobById = async(req, res) => {
