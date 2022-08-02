@@ -10,8 +10,23 @@ import route from "./routes/index.routes.js";
 import { notFound } from "./Middleware/not-found.js";
 import { errorHandlerMiddleware } from "./Middleware/error-handler.js";
 
+// extra security package
+import helmet from "helmet";
+import cors from "cors";
+import xss from "xss-clean";
+import rateLimiter from "express-rate-limit";
+
 app.use(express.json());
-// extra package
+app.set("trust proxy", 1); //since deploying in heroku
+app.use(
+  rateLimiter({
+    windowMs: 15 * 60 * 1000, //15minitus
+    max: 100, //maximum requests for each ip
+  })
+);
+app.use(helmet());
+app.use(cors());
+app.use(xss());
 
 // routes
 app.get("/", (req, res) => {
